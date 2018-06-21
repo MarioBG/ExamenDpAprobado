@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	
+	<definition name="advertisement/edit" extends="master.page">	
+		<put-attribute name="title" value="Advert edition" />
+		<put-attribute name="body" value="/views/advertisement/edit.jsp" />
+	</definition>
+	
+	<definition name="advertisement/list" extends="master.page">	
+		<put-attribute name="title" value="Advert list" />
+		<put-attribute name="body" value="/views/advertisement/list.jsp" />
+	</definition>
+	
+	<definition name="advertisement/display" extends="master.page">	
+		<put-attribute name="title" value="Advert details" />
+		<put-attribute name="body" value="/views/advertisement/display.jsp" />
+	</definition>
+	
+</tiles-definitions>

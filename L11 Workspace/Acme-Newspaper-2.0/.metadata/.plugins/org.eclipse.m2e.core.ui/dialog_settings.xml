@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="Z:\Repostitorios\Acme-Newspaper\L10 Workspace\Acme-Newspaper\Servers"/>
+			<item value="Z:\Repostitorios\Acme-Newspaper\L10 Workspace"/>
+			<item value="Z:\Repostitorios\Acme-Newspaper\L10 Workspace\Acme-Newspaper"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+		</list>
+	</section>
+</section>
