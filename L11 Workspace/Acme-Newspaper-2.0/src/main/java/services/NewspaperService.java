@@ -23,6 +23,7 @@ import domain.Newspaper;
 import domain.SubscriptionNewspaper;
 import domain.User;
 import domain.Volume;
+import domain.Zust;
 import forms.NewspaperForm;
 
 @Service
@@ -76,6 +77,7 @@ public class NewspaperService {
 		result.setAdvertisements(new ArrayList<Advertisement>());
 		result.setVolumes(new ArrayList<Volume>());
 		result.setSubscriptionsNewspaper(new ArrayList<SubscriptionNewspaper>());
+		result.setZusts(new ArrayList<Zust>());
 
 		return result;
 	}
