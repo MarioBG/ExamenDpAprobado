@@ -56,37 +56,37 @@
 <jstl:if test="${newspaper.isPrivate == false or areSubscribe == true}">
 
 	<h3>
-		<spring:message code="newspaper.articles"/>
+		<spring:message code="newspaper.articles" />
 	</h3>
-	
+
 	<input type="text" id="keyword"
-			placeholder="<spring:message code="newspaper.search"/>"
-			onkeypress="searchByKeyword(event,${newspaper.id})" />
+		placeholder="<spring:message code="newspaper.search"/>"
+		onkeypress="searchByKeyword(event,${newspaper.id})" />
 	<display:table name="${articles}" id="row"
 		requestURI="newspaper/display.do" pagesize="5" class="displaytag">
-		
+
 		<security:authorize access="hasRole('ADMIN')">
 			<display:column>
 				<a href="article/admin/delete.do?articleId=${row.id}"><spring:message
 						code="newspaper.delete" /></a>
 			</display:column>
 		</security:authorize>
-	
+
 		<spring:message var="titleHeader" code="newspaper.title" />
 		<display:column title="${titleHeader}">
 			<a href="article/display.do?articleId=${row.id}"><jstl:out
 					value="${row.title}" /></a>
 		</display:column>
-	
+
 		<spring:message var="writerHeader" code="newspaper.writer" />
 		<display:column title="${writerHeader}">
 			<a href="user/display.do?userId=${row.writer.id}"><jstl:out
 					value="${row.writer.name} ${row.writer.surname}" /></a>
 		</display:column>
-	
+
 		<spring:message var="summaryHeader" code="newspaper.summary" />
 		<display:column property="summary" title="${summaryHeader}" />
-	
+
 	</display:table>
 </jstl:if>
 
@@ -97,5 +97,27 @@
 		<br />
 	</jstl:if>
 </security:authorize>
+
+
+<display:table name="${zusts}" id="row"
+	requestURI="newspaper/display.do" pagesize="5" class="displaytag">
+
+
+	<spring:message var="titleHeader" code="zust.title" />
+	<display:column property="title" title="${titleHeader}" />
+
+	<spring:message var="descriptionHeader" code="zust.description" />
+	<display:column property="description" title="${descriptionHeader}" />
+
+	<spring:message var="tickerHeader" code="zust.ticker" />
+	<display:column property="ticker" title="${tickerHeader}" />
+
+	<spring:message code="zust.format.date" var="formatDate" />
+	<spring:message code="zust.moment" var="momentHeader" />
+	<display:column property="moment" title="${momentHeader }"
+		sortable="true" format="${formatDate}" />
+
+
+</display:table>
 
 <acme:cancel url="newspaper/list.do" code="newspaper.back" />

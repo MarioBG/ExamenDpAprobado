@@ -1,15 +1,20 @@
 
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,14 +26,14 @@ public class Zust extends DomainEntity {
 		super();
 	}
 
-
 	// Attributes
 
-	private String	title;
-	private String	ticker;
-	private Integer	klok;
-	private String	description;
-
+	private String title;
+	private String ticker;
+	private Integer gauge;
+	private String description;
+	private Date moment;
+	private boolean isFinal;
 
 	@Valid
 	@NotBlank
@@ -51,16 +56,6 @@ public class Zust extends DomainEntity {
 	}
 
 	@Valid
-	@Range(min = 1, max = 3)
-	public Integer getKlok() {
-		return this.klok;
-	}
-
-	public void setKlok(Integer klok) {
-		this.klok = klok;
-	}
-
-	@Valid
 	@NotBlank
 	public String getDescription() {
 		return this.description;
@@ -70,11 +65,37 @@ public class Zust extends DomainEntity {
 		this.description = description;
 	}
 
+	@Valid
+	@Range(min = 1, max = 3)
+	public Integer getGauge() {
+		return gauge;
+	}
+
+	public void setGauge(Integer gauge) {
+		this.gauge = gauge;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public Date getMoment() {
+		return moment;
+	}
+
+	public void setMoment(Date moment) {
+		this.moment = moment;
+	}
+
+	public boolean isFinal() {
+		return isFinal;
+	}
+
+	public void setFinal(boolean isFinal) {
+		this.isFinal = isFinal;
+	}
 
 	// Relationships
 
-	private Newspaper	newspaper;
-
+	private Newspaper newspaper;
 
 	@Valid
 	@ManyToOne(optional = false)
