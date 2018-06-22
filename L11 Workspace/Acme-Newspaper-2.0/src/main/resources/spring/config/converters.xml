@@ -15,22 +15,40 @@
 	<util:list id="converters">
 		<!-- Add your own converters using entries of the following form: <bean 
 			class="converters.Class1ToClass2" /> -->
-		<bean class="converters.ActorToStringConverter" />
-		<bean class="converters.GovernmentAgentToStringConverter" />
-		<bean class="converters.CitizenToStringConverter" />
-		<bean class="converters.BankAgentToStringConverter" />
+<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.AdminToStringConverter" />
+		<bean class="converters.AdvertisementToStringConverter" />
+		<bean class="converters.AgentToStringConverter" />
+		<bean class="converters.ArticleToStringConverter" />
 		<bean class="converters.ChirpToStringConverter" />
 		<bean class="converters.ConfigurationToStringConverter" />
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.CustomerToStringConverter" />
 		<bean class="converters.FolderToStringConverter" />
+		<bean class="converters.FollowUpToStringConverter" />
 		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.NewspaperToStringConverter" />
+		<bean class="converters.SubscriptionNewspaperToStringConverter" />
+		<bean class="converters.SubscriptionVolumeToStringConverter" />
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.VolumeToStringConverter" />
 		<bean class="converters.StringToActorConverter" />
-		<bean class="converters.StringToGovernmentAgentConverter" />
-		<bean class="converters.StringToCitizenConverter" />
-		<bean class="converters.StringToBankAgentConverter" />
+		<bean class="converters.StringToAdminConverter" />
+		<bean class="converters.StringToAdvertisementConverter" />
+		<bean class="converters.StringToAgentConverter" />
+		<bean class="converters.StringToArticleConverter" />
 		<bean class="converters.StringToChirpConverter" />
 		<bean class="converters.StringToConfigurationConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
+		<bean class="converters.StringToCustomerConverter" />
 		<bean class="converters.StringToFolderConverter" />
+		<bean class="converters.StringToFollowUpConverter" />
 		<bean class="converters.StringToMessageConverter" />
+		<bean class="converters.StringToNewspaperConverter" />
+		<bean class="converters.StringToSubscriptionNewspaperConverter" />
+		<bean class="converters.StringToSubscriptionVolumeConverter" />
+		<bean class="converters.StringToUserConverter" />
+		<bean class="converters.StringToVolumeConverter" />
 
 
 	</util:list>
