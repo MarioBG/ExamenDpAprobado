@@ -56,4 +56,17 @@ public class ZustController extends AbstractController {
 
 		return res;
 	}
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int zustId) {
+		ModelAndView res;
+		Zust zust;
+
+		zust = this.zustService.findOne(zustId);
+
+		res = new ModelAndView("zust/display");
+		res.addObject("zust", zust);
+
+		return res;
+	}
 }

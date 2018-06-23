@@ -22,73 +22,30 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <h3>
-	<b><spring:message code="user.name" />:&nbsp;</b>
-	<jstl:out value="${user.name}" />
+	<b><spring:message code="zust.title" />:&nbsp;</b>
+	<jstl:out value="${zust.title}" />
 </h3>
 
-<h3>
-	<b><spring:message code="user.surname" />:&nbsp;</b>
-	<jstl:out value="${user.surname}" />
-</h3>
+<p>
+	<b><spring:message code="zust.ticker" />:&nbsp;</b>
+	<jstl:out value="${zust.ticker}" />
+</p>
 
-<b><spring:message code="user.email" />:&nbsp;</b>
-<jstl:out value="${user.email}" />
+<p>
+	<b><spring:message code="zust.gauge" />:&nbsp;</b>
+	<jstl:out value="${zust.gauge}" />
+<p/>
+
+<spring:message var="patternDate" code="zust.pattern.date" />
+<b><spring:message code="zust.moment" />:&nbsp;</b>
+<fmt:formatDate value="${zust.moment}"
+	pattern="${patternDate}" />
+<br />
 <br />
 
-<b><spring:message code="user.phone" />:&nbsp;</b>
-<jstl:out value="${user.phone}" />
+<b><spring:message code="zust.address" />:&nbsp;</b>
+<jstl:out value="${zust.address}" />
 <br />
 
-<b><spring:message code="user.address" />:&nbsp;</b>
-<jstl:out value="${user.address}" />
-<br />
-
-<h3>
-	<spring:message code="user.articles" />
-</h3>
-
-<display:table name="${user.articles}" id="row"
-	requestURI="user/display.do" pagesize="5" class="displaytag">
-
-	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
-			<a href="article/admin/delete.do?articleId=${row.id}"><spring:message
-					code="user.delete" /></a>
-		</display:column>
-	</security:authorize>
-
-	<spring:message var="titleHeader" code="user.title" />
-	<display:column title="${titleHeader}">
-		<a href="article/display.do?articleId=${row.id}"><jstl:out
-				value="${row.title}" /></a>
-	</display:column>
-
-	<spring:message var="summaryHeader" code="user.summary" />
-	<display:column property="summary" title="${summaryHeader}" />
-
-</display:table>
-
-<h3>
-	<spring:message code="user.chirps" />
-</h3>
-
-<display:table name="${user.chirps}" id="row"
-	requestURI="user/display.do" pagesize="5" class="displaytag">
-
-	<spring:message var="titleHeader" code="chirp.title" />
-	<display:column property="description" title="${titleHeader}" />
-
-	<spring:message var="publicationMomentHeader"
-		code="user.publicationMoment" />
-	<spring:message var="formatDate" code="user.format.date" />
-	<display:column property="publicationMoment"
-		title="${publicationMomentHeader}" format="${formatDate}"
-		sortable="true" />
-
-	<spring:message var="descriptionHeader" code="chirp.description" />
-	<display:column property="description" title="${descriptionHeader}" />
-
-</display:table>
-
-<acme:cancel code="user.back" url="user/list.do" />
+<acme:cancel code="zust.back" url="zust/list.do" />
 

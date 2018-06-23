@@ -17,8 +17,13 @@
 <tiles-definitions>
 
 	<definition name="zust/list" extends="master.page">	
-		<put-attribute name="title" value="Mostrar zust" />
+		<put-attribute name="title" value="Mostrar zusts" />
 		<put-attribute name="body" value="/views/zust/list.jsp" />
+	</definition>
+	
+	<definition name="zust/display" extends="master.page">	
+		<put-attribute name="title" value="Mostrar un zust" />
+		<put-attribute name="body" value="/views/zust/display.jsp" />
 	</definition>
 	
 	<definition name="zust/edit" extends="master.page">	

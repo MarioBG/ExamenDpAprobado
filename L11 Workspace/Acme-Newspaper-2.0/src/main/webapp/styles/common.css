@@ -17,3 +17,16 @@
 	color: red;
 	font-weight: bolder;
 }
+
+.gauge1{
+	background-color: LightYellow;
+}
+
+.gauge2{
+	background-color: Moccasin;
+}
+
+.gauge3{
+	background-color: Blue;
+	color: White;
+}
