@@ -1,3 +1,4 @@
+
 package controllers.admin;
 
 import java.util.ArrayList;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.NewspaperService;
+import services.ZustService;
 import controllers.AbstractController;
 import domain.Newspaper;
 import domain.Zust;
-import services.NewspaperService;
-import services.ZustService;
 
 @Controller
 @RequestMapping("/zust/admin")
@@ -25,30 +26,15 @@ public class ZustAdminController extends AbstractController {
 
 	// Services --------------------------------
 	@Autowired
-	private ZustService zustService;
+	private ZustService			zustService;
 
 	@Autowired
-	private NewspaperService newspaperService;
+	private NewspaperService	newspaperService;
+
 
 	// Constructors ----------------------------
 	public ZustAdminController() {
 		super();
-	}
-
-	// List -----------------------------------
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = false) Integer newspaperId,
-			@RequestParam(required = false) String keyword) {
-		ModelAndView res;
-		Collection<Zust> zusts;
-
-		zusts = this.zustService.findAll();
-
-		res = new ModelAndView("zust/list");
-		res.addObject("zust", zusts);
-		res.addObject("requestURI", "zust/admin/list.do");
-
-		return res;
 	}
 
 	// Create ----------------------------------------
@@ -80,12 +66,12 @@ public class ZustAdminController extends AbstractController {
 	// Save ----------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Zust zust, final BindingResult binding) {
+	public ModelAndView save(@Valid final Zust zust, final BindingResult binding) {
 		ModelAndView res;
 
-		if (binding.hasErrors()) {
+		if (binding.hasErrors())
 			res = this.createEditModelAndView(zust, "zust.params.error");
-		} else
+		else
 			try {
 				this.zustService.save(zust);
 
@@ -100,8 +86,8 @@ public class ZustAdminController extends AbstractController {
 
 	// Delete ----------------------------------
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(int zustId) {
-		Zust zust = this.zustService.findOne(zustId);
+	public ModelAndView delete(final int zustId) {
+		final Zust zust = this.zustService.findOne(zustId);
 		this.zustService.delete(zust);
 		return new ModelAndView("redirect:list.do");
 	}
@@ -119,9 +105,9 @@ public class ZustAdminController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Zust zust, final String message) {
 		ModelAndView res;
 		res = new ModelAndView("zust/edit");
-		int newspaperId = zust.getNewspaper().getId();
-		Newspaper newspaper = this.newspaperService.findOne(newspaperId);
-		Collection<Newspaper> newspapers = new ArrayList<Newspaper>();
+		final int newspaperId = zust.getNewspaper().getId();
+		final Newspaper newspaper = this.newspaperService.findOne(newspaperId);
+		final Collection<Newspaper> newspapers = new ArrayList<Newspaper>();
 		newspapers.add(newspaper);
 
 		res.addObject("zust", zust);

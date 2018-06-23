@@ -13,9 +13,21 @@
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin" />
+		<property name="username" value="admin1" />
 		<property name="password"
-			value="21232f297a57a5a743894a0e4a801fc3" />
+			value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin2" />
+		<property name="password"
+			value="c84258e9c39059a89ab77d846ddab909" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -146,7 +158,7 @@
 
 	<!-- Admin -->
 
-	<bean id="admin" class="domain.Admin">
+	<bean id="admin1" class="domain.Admin">
 		<property name="name" value="Administrador" />
 		<property name="surname" value="Acme Explorer" />
 		<property name="email" value="admin@system.com" />
@@ -160,6 +172,24 @@
 				<ref bean="folder3" />
 				<ref bean="folder4" />
 				<ref bean="folder5" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="admin2" class="domain.Admin">
+		<property name="name" value="Administrador" />
+		<property name="surname" value="Acme Explorer" />
+		<property name="email" value="admin2@system.com" />
+		<property name="phone" value="694443000" />
+		<property name="address" value="C/ Lugo" />
+		<property name="userAccount" ref="userAccount1" />
+		<property name="folders">
+			<list>
+				<ref bean="folder51" />
+				<ref bean="folder52" />
+				<ref bean="folder53" />
+				<ref bean="folder54" />
+				<ref bean="folder55" />
 			</list>
 		</property>
 	</bean>
@@ -569,7 +599,98 @@
 		<property name="newspaper" ref="newspaper3" />
 	</bean>
 
-	<!-- Folder -->
+	<bean id="folder51" class="domain.Folder">
+		<property name="name" value="in box" />
+		<property name="predefined" value="true" />
+		<property name="parent">
+			<null />
+		</property>
+		<property name="messages">
+			<list>
+				<null />
+			</list>
+		</property>
+		<property name="children">
+			<list>
+				<null />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="folder52" class="domain.Folder">
+		<property name="name" value="out box" />
+		<property name="predefined" value="true" />
+		<property name="parent">
+			<null />
+		</property>
+		<property name="messages">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="children">
+			<list>
+				<null />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="folder53" class="domain.Folder">
+		<property name="name" value="notification box" />
+		<property name="predefined" value="true" />
+		<property name="parent">
+			<null />
+		</property>
+
+		<property name="messages">
+			<list>
+				<null />
+			</list>
+		</property>
+		<property name="children">
+			<list>
+				<null />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="folder54" class="domain.Folder">
+		<property name="name" value="trash box" />
+		<property name="predefined" value="true" />
+		<property name="parent">
+			<null />
+		</property>
+		<property name="messages">
+			<list>
+				<null />
+			</list>
+		</property>
+		<property name="children">
+			<list>
+				<null />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="folder55" class="domain.Folder">
+		<property name="name" value="spam box" />
+		<property name="predefined" value="true" />
+		<property name="parent">
+			<null />
+		</property>
+		<property name="messages">
+			<list>
+				<null />
+			</list>
+		</property>
+		<property name="children">
+			<list>
+				<null />
+			</list>
+		</property>
+	</bean>
+	
+		<!-- Folder -->
 	<!-- Admin folders -->
 	<bean id="folder1" class="domain.Folder">
 		<property name="name" value="in box" />
@@ -1521,7 +1642,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="user1" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1533,7 +1654,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="user2" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1545,7 +1666,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="user3" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1557,7 +1678,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="user4" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1569,7 +1690,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="customer1" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1581,7 +1702,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="customer2" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1593,7 +1714,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="agent1" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1605,7 +1726,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="agent2" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1617,7 +1738,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="user1" />
 		<property name="folder" ref="folder8"/>
 	</bean>
@@ -1629,7 +1750,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="user2" />
 		<property name="folder" ref="folder13"/>
 	</bean>
@@ -1641,7 +1762,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="user3" />
 		<property name="folder" ref="folder18"/>
 	</bean>
@@ -1653,7 +1774,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="user4" />
 		<property name="folder" ref="folder23"/>
 	</bean>
@@ -1665,7 +1786,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="customer1" />
 		<property name="folder" ref="folder28"/>
 	</bean>
@@ -1677,7 +1798,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="customer2" />
 		<property name="folder" ref="folder33"/>
 	</bean>
@@ -1689,7 +1810,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="agent1" />
 		<property name="folder" ref="folder38"/>
 	</bean>
@@ -1701,7 +1822,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="agent2" />
 		<property name="folder" ref="folder43"/>
 	</bean>
@@ -1713,7 +1834,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="agent3" />
 		<property name="folder" ref="folder2"/>
 	</bean>
@@ -1725,7 +1846,7 @@
 		<property name="body"
 			value="This is a body example of message." />
 		<property name="priority" value="HIGH" />
-		<property name="sender" ref="admin" />
+		<property name="sender" ref="admin1" />
 		<property name="recipient" ref="agent3" />
 		<property name="folder" ref="folder48"/>
 	</bean>
@@ -1914,6 +2035,11 @@
 			value="https://cdn4.iconfinder.com/data/icons/academic-disciplines-color-sticker/64/current-events-256.png" />
 		<property name="isPrivate" value="false" />
 		<property name="publisher" ref="user1" />
+		<property name="zusts">
+			<list>
+				<ref bean="zust1" />
+			</list>
+		</property>
 		<property name="articles">
 			<list>
 				<ref bean="article1" />
@@ -1946,6 +2072,11 @@
 			value="https://cdn4.iconfinder.com/data/icons/academic-disciplines-color-sticker/64/current-events-256.png" />
 		<property name="isPrivate" value="true" />
 		<property name="publisher" ref="user2" />
+		<property name="zusts">
+			<list>
+				<null/>
+			</list>
+		</property>
 		<property name="articles">
 			<list>
 				<ref bean="article2" />
@@ -1977,6 +2108,11 @@
 			value="https://cdn4.iconfinder.com/data/icons/academic-disciplines-color-sticker/64/current-events-256.png" />
 		<property name="isPrivate" value="false" />
 		<property name="publisher" ref="user3" />
+		<property name="zusts">
+			<list>
+				<null/>
+			</list>
+		</property>
 		<property name="articles">
 			<list>
 				<ref bean="article3" />
@@ -2010,6 +2146,11 @@
 		<property name="picture"
 			value="https://www.elconfidencialdigital.com/Periodicos_ECDIMA20161216_0006_21.jpg" />
 		<property name="publisher" ref="user1" />
+		<property name="zusts">
+			<list>
+				<null/>
+			</list>
+		</property>
 		<property name="subscriptionsNewspaper">
 			<list>
 			</list>
@@ -2043,6 +2184,11 @@
 		<property name="picture"
 			value="https://www.elconfidencialdigital.com/Periodicos_ECDIMA20161216_0006_21.jpg" />
 		<property name="publisher" ref="user3" />
+		<property name="zusts">
+			<list>
+				<null/>
+			</list>
+		</property>
 		<property name="subscriptionsNewspaper">
 			<list>
 			</list>
@@ -2075,6 +2221,11 @@
 		<property name="picture"
 			value="https://www.elconfidencialdigital.com/Periodicos_ECDIMA20161216_0006_21.jpg" />
 		<property name="publisher" ref="user3" />
+		<property name="zusts">
+			<list>
+				<null/>
+			</list>
+		</property>
 		<property name="subscriptionsNewspaper">
 			<list>
 			</list>
@@ -2107,6 +2258,11 @@
 		<property name="picture"
 			value="https://www.elconfidencialdigital.com/Periodicos_ECDIMA20161216_0006_21.jpg" />
 		<property name="publisher" ref="user1" />
+		<property name="zusts">
+			<list>
+				<null/>
+			</list>
+		</property>
 		<property name="subscriptionsNewspaper">
 			<list>
 			</list>
@@ -2362,5 +2518,18 @@
 	<bean id="configuration" class="domain.Configuration">
 		<property name="tabooWords" value="sex,sexo,viagra,cialis" />
 	</bean>
+	
+	<!-- Zusts -->
+	
+	<bean id="zust1" class="domain.Zust">
+		<property name="title" value="Zust 1"/>
+		<property name="ticker" value="160610-1234"/>
+		<property name="gauge" value="3"/>
+		<property name="description" value="Este es un zust muy majo y simpático"></property>
+		<property name="moment" value="2018/04/01 12:00"></property>
+		<property name="isFinal" value="false"></property>
+		<property name="admin" ref="admin1"></property>
+	</bean>
+	
 
 </beans>

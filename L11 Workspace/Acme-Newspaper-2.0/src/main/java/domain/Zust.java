@@ -26,14 +26,16 @@ public class Zust extends DomainEntity {
 		super();
 	}
 
+
 	// Attributes
 
-	private String title;
-	private String ticker;
-	private Integer gauge;
-	private String description;
-	private Date moment;
-	private boolean isFinal;
+	private String	title;
+	private String	ticker;
+	private Integer	gauge;
+	private String	description;
+	private Date	moment;
+	private boolean	isFinal;
+
 
 	@Valid
 	@NotBlank
@@ -51,7 +53,7 @@ public class Zust extends DomainEntity {
 		return this.ticker;
 	}
 
-	public void setTicker(String ticker) {
+	public void setTicker(final String ticker) {
 		this.ticker = ticker;
 	}
 
@@ -61,41 +63,44 @@ public class Zust extends DomainEntity {
 		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
 	@Valid
 	@Range(min = 1, max = 3)
 	public Integer getGauge() {
-		return gauge;
+		return this.gauge;
 	}
 
-	public void setGauge(Integer gauge) {
+	public void setGauge(final Integer gauge) {
 		this.gauge = gauge;
 	}
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getMoment() {
-		return moment;
+		return this.moment;
 	}
 
-	public void setMoment(Date moment) {
+	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
 
 	public boolean isFinal() {
-		return isFinal;
+		return this.isFinal;
 	}
 
-	public void setFinal(boolean isFinal) {
+	public void setFinal(final boolean isFinal) {
 		this.isFinal = isFinal;
 	}
 
+
 	// Relationships
 
-	private Newspaper newspaper;
+	private Newspaper	newspaper;
+	private Admin		admin;
+
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -103,8 +108,18 @@ public class Zust extends DomainEntity {
 		return this.newspaper;
 	}
 
-	public void setNewspaper(Newspaper newspaper) {
+	public void setNewspaper(final Newspaper newspaper) {
 		this.newspaper = newspaper;
+	}
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Admin getAdmin() {
+		return this.admin;
+	}
+
+	public void setAdmin(final Admin admin) {
+		this.admin = admin;
 	}
 
 }

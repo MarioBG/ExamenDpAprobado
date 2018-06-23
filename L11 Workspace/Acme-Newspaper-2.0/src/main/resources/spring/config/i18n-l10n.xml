@@ -35,6 +35,7 @@
 		<value>/views/subscriptionVolume/messages</value>
 		<value>/views/folder/messages</value>
 		<value>/views/message/messages</value>
+		<value>/views/zust/messages</value>
 
 	</util:list>
 

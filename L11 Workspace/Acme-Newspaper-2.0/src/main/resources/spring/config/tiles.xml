@@ -36,6 +36,7 @@
 		<value>/views/agent/tiles.xml</value>
 		<value>/views/folder/tiles.xml</value>
 		<value>/views/message/tiles.xml</value>
+		<value>/views/zust/tiles.xml</value>
 	</util:list>
 
 </beans>
