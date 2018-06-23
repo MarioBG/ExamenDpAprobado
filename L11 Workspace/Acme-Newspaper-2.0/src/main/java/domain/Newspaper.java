@@ -26,9 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(indexes = {
-	@Index(columnList = "publisher_id")
-})
+@Table(indexes = { @Index(columnList = "publisher_id") })
 public class Newspaper extends DomainEntity {
 
 	// Constructors
@@ -37,15 +35,13 @@ public class Newspaper extends DomainEntity {
 		super();
 	}
 
-
 	// Attributes
 
-	private String	title;
-	private String	description;
-	private Date	publicationDate;
-	private String	picture;
-	private boolean	isPrivate;
-
+	private String title;
+	private String description;
+	private Date publicationDate;
+	private String picture;
+	private boolean isPrivate;
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
@@ -95,16 +91,14 @@ public class Newspaper extends DomainEntity {
 		this.isPrivate = isPrivate;
 	}
 
-
 	// Relationships
 
-	private User								publisher;
-	private Collection<Article>					articles;
-	private Collection<SubscriptionNewspaper>	subscriptionsNewspaper;
-	private Collection<Advertisement>			advertisements;
-	private Collection<Volume>					volumes;
-	private Collection<Zust>					zusts;
-
+	private User publisher;
+	private Collection<Article> articles;
+	private Collection<SubscriptionNewspaper> subscriptionsNewspaper;
+	private Collection<Advertisement> advertisements;
+	private Collection<Volume> volumes;
+	private Collection<Zust> zusts;
 
 	@Valid
 	@NotNull
@@ -162,7 +156,6 @@ public class Newspaper extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@OneToMany
 	public Collection<Zust> getZusts() {
 		return this.zusts;

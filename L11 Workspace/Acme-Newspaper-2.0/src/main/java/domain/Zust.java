@@ -103,7 +103,7 @@ public class Zust extends DomainEntity {
 
 
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Newspaper getNewspaper() {
 		return this.newspaper;
 	}
