@@ -24,7 +24,7 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="userAccount1" class="security.UserAccount">
+	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="admin2" />
 		<property name="password"
 			value="c84258e9c39059a89ab77d846ddab909" />
@@ -182,7 +182,7 @@
 		<property name="email" value="admin2@system.com" />
 		<property name="phone" value="694443000" />
 		<property name="address" value="C/ Lugo" />
-		<property name="userAccount" ref="userAccount1" />
+		<property name="userAccount" ref="userAccount2" />
 		<property name="folders">
 			<list>
 				<ref bean="folder51" />
@@ -2529,6 +2529,7 @@
 		<property name="moment" value="2018/04/01 12:00"></property>
 		<property name="isFinal" value="false"></property>
 		<property name="admin" ref="admin1"></property>
+		<property name="newspaper" ref="newspaper1"></property>
 	</bean>
 	
 
