@@ -22,6 +22,8 @@
 <form:form action="zust/admin/edit.do" modelAttribute="zust">
 
 	<form:hidden path="id" />
+	<form:hidden path="ticker" />
+	<form:hidden path="admin" />
 
 	<acme:textbox code="zust.title" path="title" />
 	<br />
@@ -35,9 +37,10 @@
 	<acme:textbox code="zust.moment" path="moment" placeholder="dd/MM/yyyy" />
 	<br />
 
-
-	<acme:selectObligatory items="${newspapers}" itemLabel="title"
-		code="zust.newspaper" path="newspaperId" />
+	<jstl:if test="${zust.isFinal == true}">
+		<acme:selectObligatory items="${newspapers}" itemLabel="title"
+			code="zust.newspaper" path="newspaperId" />
+	</jstl:if>
 	<br />
 
 	<acme:checkbox code="zust.isFinal" path="isFinal" />
@@ -52,7 +55,7 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('ADMIN')">
-		<jstl:if test="${zust.id !=0 }">
+		<jstl:if test="${zust.id !=0 && zust.isFinal == false}">
 			<input type="submit" name="delete"
 				value="<spring:message code="zust.delete"/>"
 				onclick="return confirm('<spring:message code="zust.confirm.delete"/>')" />&nbsp;

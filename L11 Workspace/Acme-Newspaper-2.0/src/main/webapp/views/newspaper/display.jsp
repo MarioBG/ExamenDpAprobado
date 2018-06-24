@@ -103,6 +103,10 @@
 	requestURI="newspaper/display.do" pagesize="5" class="displaytag">
 
 
+	<display:column>
+		<a href="zust/display.do?zustId=${row.id}"> <spring:message
+				code="zust.display" /></a>
+	</display:column>
 	<spring:message var="titleHeader" code="zust.title" />
 	<display:column property="title" title="${titleHeader}" />
 

@@ -68,6 +68,15 @@
 								code="master.page.chirp.timeline" /></a></li>
 
 				</ul></li>
+
+			<li><a class="fNiv"><spring:message
+						code="master.page.admin.zust" /></a>
+				<ul>
+					<li><a href="zust/admin/create.do"><spring:message
+								code="master.page.zust.create" /></a></li>
+					<li><a href="zust/admin/list.do"><spring:message
+								code="master.page.zust.myZust" /></a></li>
+				</ul></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">

@@ -1,3 +1,4 @@
+
 <%--
  * list.jsp
  *
@@ -25,10 +26,7 @@
 	defaultorder="descending">
 
 
-	<display:column>
-		<a href="zust/display.do?zustId=${row.id}"> <spring:message
-				code="zust.display" /></a>
-	</display:column>
+	
 
 	<spring:message code="zust.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader }" />
@@ -51,6 +49,11 @@
 		</jstl:if>
 		<jstl:if test="${row.isFinal == false}">
 			<spring:message code="zust.no" />
+			<security:authorize access="hasRole('ADMIN')">
+				<a href="zust/admin/edit.do?zustId=${row.id}"> <spring:message
+						code="zust.display" /></a>
+			</security:authorize>
+
 		</jstl:if>
 	</display:column>
 

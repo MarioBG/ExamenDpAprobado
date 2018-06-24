@@ -15,7 +15,7 @@
 	<util:list id="converters">
 		<!-- Add your own converters using entries of the following form: <bean 
 			class="converters.Class1ToClass2" /> -->
-<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.ActorToStringConverter" />
 		<bean class="converters.AdminToStringConverter" />
 		<bean class="converters.AdvertisementToStringConverter" />
 		<bean class="converters.AgentToStringConverter" />
@@ -32,6 +32,7 @@
 		<bean class="converters.SubscriptionVolumeToStringConverter" />
 		<bean class="converters.UserToStringConverter" />
 		<bean class="converters.VolumeToStringConverter" />
+		<bean class="converters.ZustToStringConverter" />
 		<bean class="converters.StringToActorConverter" />
 		<bean class="converters.StringToAdminConverter" />
 		<bean class="converters.StringToAdvertisementConverter" />
@@ -49,6 +50,7 @@
 		<bean class="converters.StringToSubscriptionVolumeConverter" />
 		<bean class="converters.StringToUserConverter" />
 		<bean class="converters.StringToVolumeConverter" />
+		<bean class="converters.StringToZustConverter" />
 
 
 	</util:list>

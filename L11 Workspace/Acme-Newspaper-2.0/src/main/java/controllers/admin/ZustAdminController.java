@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.NewspaperService;
-import services.ZustService;
 import controllers.AbstractController;
+import domain.Admin;
 import domain.Newspaper;
 import domain.Zust;
+import services.AdminService;
+import services.NewspaperService;
+import services.ZustService;
 
 @Controller
 @RequestMapping("/zust/admin")
@@ -26,12 +28,13 @@ public class ZustAdminController extends AbstractController {
 
 	// Services --------------------------------
 	@Autowired
-	private ZustService			zustService;
+	private ZustService zustService;
 
 	@Autowired
-	private NewspaperService	newspaperService;
+	private NewspaperService newspaperService;
 
-
+	@Autowired
+	private AdminService adminService;
 	// Constructors ----------------------------
 	public ZustAdminController() {
 		super();
@@ -92,6 +95,22 @@ public class ZustAdminController extends AbstractController {
 		return new ModelAndView("redirect:list.do");
 	}
 
+	// List ---------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required = false) final Integer newspaperId,
+			@RequestParam(required = false) final String keyword) {
+		ModelAndView res;
+		Collection<Zust> zusts;
+		Admin admin = this.adminService.findByPrincipal();
+		int adminId = admin.getId();
+		zusts = this.zustService.findAllByAdminId(adminId);
+
+		res = new ModelAndView("zust/list");
+		res.addObject("zust", zusts);
+		res.addObject("requestURI", "zust/list.do");
+
+		return res;
+	}
 	// Ancillary methods ----------------------------------------
 
 	protected ModelAndView createEditModelAndView(final Zust zust) {

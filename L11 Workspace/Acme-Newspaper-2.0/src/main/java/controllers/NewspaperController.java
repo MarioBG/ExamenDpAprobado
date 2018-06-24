@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Article;
+import domain.Newspaper;
+import domain.Zust;
 import services.ArticleService;
 import services.CustomerService;
 import services.NewspaperService;
 import services.UserService;
-import domain.Article;
-import domain.Newspaper;
+import services.ZustService;
 
 @Controller
 @RequestMapping("/newspaper")
@@ -31,6 +33,9 @@ public class NewspaperController extends AbstractController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private ZustService zustService;
 
 	@Autowired
 	private CustomerService customerService;
@@ -54,8 +59,7 @@ public class NewspaperController extends AbstractController {
 		} else if (keyword == null && volumeId != null) {
 			newspapers = newspaperService.findByVolumeId(volumeId);
 		} else if (keyword != null && volumeId != null) {
-			newspapers = newspaperService.findByVolumeIdByKeyword(volumeId,
-					keyword);
+			newspapers = newspaperService.findByVolumeIdByKeyword(volumeId, keyword);
 		} else {
 			newspapers = newspaperService.findAvalibleNewspapers();
 		}
@@ -70,12 +74,12 @@ public class NewspaperController extends AbstractController {
 	// Display -------------------------------------------------------
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam int newspaperId,
-			@RequestParam(required = false) String keyword) {
+	public ModelAndView display(@RequestParam int newspaperId, @RequestParam(required = false) String keyword) {
 
 		Newspaper newspaper = newspaperService.findOne(newspaperId);
 		Collection<Article> articles;
 		boolean areSubscribe = false;
+		Collection<Zust> zusts = this.zustService.zustByNewspaperId(newspaperId);
 
 		if (keyword != null) {
 			articles = this.articleService.findPerKeyword(keyword, newspaperId);
@@ -83,8 +87,8 @@ public class NewspaperController extends AbstractController {
 			articles = newspaper.getArticles();
 		}
 
-		if ((customerService.findByPrincipal() != null && newspaperService
-				.findSubscribedNewspapersByPrincipal().contains(newspaper))
+		if ((customerService.findByPrincipal() != null
+				&& newspaperService.findSubscribedNewspapersByPrincipal().contains(newspaper))
 				|| userService.findByPrincipal() != null) {
 			areSubscribe = true;
 		}
@@ -92,6 +96,7 @@ public class NewspaperController extends AbstractController {
 		ModelAndView result = new ModelAndView("newspaper/display");
 		result.addObject("newspaper", newspaper);
 		result.addObject("articles", articles);
+		result.addObject("zusts", zusts);
 		result.addObject("areSubscribe", areSubscribe);
 		result.addObject("date", new Date());
 

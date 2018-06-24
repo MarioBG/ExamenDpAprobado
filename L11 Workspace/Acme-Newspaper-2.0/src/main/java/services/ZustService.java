@@ -6,10 +6,12 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import domain.Admin;
 import domain.Zust;
 import repositories.ZustRepository;
 
@@ -19,15 +21,9 @@ public class ZustService {
 
 	// Managed repository
 	@Autowired
-	private ZustRepository ZustRepository;
+	private ZustRepository zustRepository;
 
 	// Supporting services
-	@Autowired
-	private NewspaperService newspaperService;
-
-	@Autowired
-	private UserService userService;
-
 	@Autowired
 	private AdminService adminService;
 
@@ -39,18 +35,53 @@ public class ZustService {
 	// Simple CRUD methods
 	public Zust create() {
 
-		Assert.notNull(this.adminService.findByPrincipal());
+		Admin admin = this.adminService.findByPrincipal();
+		Assert.notNull(admin);
 
 		Zust res = new Zust();
 
 		res.setTicker(getAutoGenerateTicker());
+		res.setAdmin(admin);
 
 		return res;
 	}
 
+	// Compruebo que ese ticker no este en uso y le asigno uno único
 	private String getAutoGenerateTicker() {
-		// TODO GENERAR PATRON PARA EL TICKET
-		return null;
+		Collection<Zust> zusts = zustRepository.findAll();
+		String ticker = generateTicker();
+		for (Zust zust : zusts) {
+			while (zust.getTicker().equals(ticker)) {
+				ticker = generateTicker();
+			}
+		}
+		return ticker;
+
+	}
+
+	private String generateTicker() {
+
+		String ticker = "";
+		final LocalDate date;
+		date = new LocalDate();
+
+		int dd = date.getDayOfMonth();
+		int mm = date.getMonthOfYear();
+		int y = date.getYear();
+		int yy = y % 100;
+
+		String day = Integer.toString(dd);
+		String month = Integer.toString(mm);
+		String year = Integer.toString(yy);
+
+		Integer num1 = (int) (Math.random() * 10000);
+		String number = num1.toString();
+
+		// ddMMyy-XXXX
+
+		ticker = day + month + year + "-" + number;
+
+		return ticker;
 	}
 
 	public Zust save(final Zust Zust) {
@@ -62,7 +93,7 @@ public class ZustService {
 
 		Zust res;
 
-		res = this.ZustRepository.save(Zust);
+		res = this.zustRepository.save(Zust);
 
 		return res;
 	}
@@ -70,78 +101,45 @@ public class ZustService {
 	public Collection<Zust> findAll() {
 		Collection<Zust> res = new ArrayList<Zust>();
 
-		res = this.ZustRepository.findAll();
+		res = this.zustRepository.findAll();
 
 		Assert.notNull(res);
 		return res;
 	}
 
-	public Zust findOne(final int ZustId) {
-		Assert.isTrue(ZustId != 0);
+	public Zust findOne(final int zustId) {
+		Assert.isTrue(zustId != 0);
 		Zust res;
 
-		res = this.ZustRepository.findOne(ZustId);
+		res = this.zustRepository.findOne(zustId);
 
 		return res;
 	}
 
-	public Zust findOneToEdit(final int ZustId) {
-		Assert.isTrue(ZustId != 0);
+	public Zust findOneToEdit(final int zustId) {
+		Assert.isTrue(zustId != 0);
 		Zust res;
 
-		res = this.ZustRepository.findOne(ZustId);
+		res = this.zustRepository.findOne(zustId);
 
 		return res;
 	}
 
-	public void delete(final Zust Zust) {
+	public void delete(final Zust zust) {
 		this.adminService.checkAuthority();
 
-		Assert.notNull(Zust);
-		Assert.isTrue(Zust.getId() != 0);
+		Assert.notNull(zust);
+		Assert.isTrue(zust.getId() != 0);
 
-		this.ZustRepository.delete(Zust);
+		this.zustRepository.delete(zust);
 	}
 
-	// Other busines methods
+	public Collection<Zust> zustByNewspaperId(int newspaperId) {
+		return this.zustRepository.zustByNewspaperId(newspaperId);
+	}
 
-	// public ZustForm construct(Zust Zust) {
-	// Assert.notNull(Zust);
-	// ZustForm res = new ZustForm();
-	//
-	// res.setId(Zust.getId());
-	// res.setTitle(Zust.getTitle());
-	// res.setSummary(Zust.getSummary());
-	// res.setBody(Zust.getBody());
-	// res.setPictures(Zust.getPictures());
-	// res.setIsFinal(Zust.getIsFinal());
-	// res.setNewspaperId(Zust.getNewspaper().getId());
-	//
-	// return res;
-	// }
-
-	// public Zust reconstruct(ZustForm ZustForm, BindingResult binding) {
-	// Assert.notNull(ZustForm);
-	// Newspaper newspaper =
-	// this.newspaperService.findOne(ZustForm.getNewspaperId());
-	// Zust res;
-	//
-	// if (ZustForm.getId() != 0)
-	// res = this.findOne(ZustForm.getId());
-	// else
-	// res = this.create(newspaper.getId());
-	//
-	// res.setTitle(ZustForm.getTitle());
-	// res.setSummary(ZustForm.getSummary());
-	// res.setBody(ZustForm.getBody());
-	// res.setPictures(ZustForm.getPictures());
-	// res.setIsFinal(ZustForm.getIsFinal());
-	// res.setNewspaper(newspaper);
-	//
-	// if (binding != null)
-	// this.validator.validate(res, binding);
-	//
-	// return res;
-	// }
+	public Collection<Zust> findAllByAdminId(int adminId) {
+		return this.zustRepository.findAllByAdminId(adminId);
+	}
 
 }
