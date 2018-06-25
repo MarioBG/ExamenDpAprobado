@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -11,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.ZustRepository;
 import domain.Admin;
 import domain.Zust;
-import repositories.ZustRepository;
 
 @Service
 @Transactional
@@ -21,11 +22,12 @@ public class ZustService {
 
 	// Managed repository
 	@Autowired
-	private ZustRepository zustRepository;
+	private ZustRepository	zustRepository;
 
 	// Supporting services
 	@Autowired
-	private AdminService adminService;
+	private AdminService	adminService;
+
 
 	// Constructors
 	public ZustService() {
@@ -40,7 +42,7 @@ public class ZustService {
 
 		Zust res = new Zust();
 
-		res.setTicker(getAutoGenerateTicker());
+		res.setTicker(this.getAutoGenerateTicker());
 		res.setAdmin(admin);
 
 		return res;
@@ -48,11 +50,11 @@ public class ZustService {
 
 	// Compruebo que ese ticker no este en uso y le asigno uno único
 	private String getAutoGenerateTicker() {
-		Collection<Zust> zusts = zustRepository.findAll();
-		String ticker = generateTicker();
+		Collection<Zust> zusts = this.zustRepository.findAll();
+		String ticker = this.generateTicker();
 		for (Zust zust : zusts) {
 			while (zust.getTicker().equals(ticker)) {
-				ticker = generateTicker();
+				ticker = this.generateTicker();
 			}
 		}
 		return ticker;
@@ -70,13 +72,9 @@ public class ZustService {
 		int y = date.getYear();
 		int yy = y % 100;
 
-		String day = Integer.toString(dd);
-		String month = Integer.toString(mm);
-		String year = Integer.toString(yy);
-
-		if (day.length() == 0) {
-			day = "0" + day;
-		}
+		String day = String.format("%02d", dd);
+		String month = String.format("%02d", mm);
+		String year = String.format("%02d", yy);
 		Integer num1 = (int) (Math.random() * 10000);
 		String number = num1.toString();
 
