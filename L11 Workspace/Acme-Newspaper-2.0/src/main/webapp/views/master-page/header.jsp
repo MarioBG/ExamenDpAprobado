@@ -38,7 +38,15 @@
 								code="master.page.chirp.list" /></a></li>
 					<li><a href="advertisement/admin/listTaboo.do"><spring:message
 								code="master.page.advertisement.suspicious" /></a></li>
-				</ul>
+				</ul></li>
+			<li><a class="fNiv"><spring:message
+						code="master.page.admin.zust" /></a>
+				<ul>
+					<li><a href="zust/admin/create.do"><spring:message
+								code="master.page.zust.create" /></a></li>
+					<li><a href="zust/admin/list.do"><spring:message
+								code="master.page.zust.myZust" /></a></li>
+				</ul></li>
 			<li><a href="configuration/admin/list.do"><spring:message
 						code="master.page.configuration" /></a>
 		</security:authorize>
@@ -69,14 +77,7 @@
 
 				</ul></li>
 
-			<li><a class="fNiv"><spring:message
-						code="master.page.admin.zust" /></a>
-				<ul>
-					<li><a href="zust/admin/create.do"><spring:message
-								code="master.page.zust.create" /></a></li>
-					<li><a href="zust/admin/list.do"><spring:message
-								code="master.page.zust.myZust" /></a></li>
-				</ul></li>
+
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">

@@ -26,16 +26,14 @@ public class Zust extends DomainEntity {
 		super();
 	}
 
-
 	// Attributes
 
-	private String	title;
-	private String	ticker;
-	private Integer	gauge;
-	private String	description;
-	private Date	moment;
-	private boolean	isFinal;
-
+	private String title;
+	private String ticker;
+	private Integer gauge;
+	private String description;
+	private Date moment;
+	private boolean isFinal;
 
 	@Valid
 	@NotBlank
@@ -95,14 +93,11 @@ public class Zust extends DomainEntity {
 		this.isFinal = isFinal;
 	}
 
-
 	// Relationships
 
-	private Newspaper	newspaper;
-	private Admin		admin;
+	private Newspaper newspaper;
+	private Admin admin;
 
-
-	@Valid
 	@ManyToOne(optional = true)
 	public Newspaper getNewspaper() {
 		return this.newspaper;

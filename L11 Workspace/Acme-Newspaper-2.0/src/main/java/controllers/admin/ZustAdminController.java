@@ -1,7 +1,6 @@
 
 package controllers.admin;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -31,10 +30,11 @@ public class ZustAdminController extends AbstractController {
 	private ZustService zustService;
 
 	@Autowired
-	private NewspaperService newspaperService;
+	private AdminService adminService;
 
 	@Autowired
-	private AdminService adminService;
+	private NewspaperService newspaperService;
+
 	// Constructors ----------------------------
 	public ZustAdminController() {
 		super();
@@ -78,7 +78,7 @@ public class ZustAdminController extends AbstractController {
 			try {
 				this.zustService.save(zust);
 
-				res = new ModelAndView("redirect:/zust/user/list.do");
+				res = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(zust, "zust.commit.error");
@@ -107,7 +107,7 @@ public class ZustAdminController extends AbstractController {
 
 		res = new ModelAndView("zust/list");
 		res.addObject("zust", zusts);
-		res.addObject("requestURI", "zust/list.do");
+		res.addObject("requestURI", "zust/admin/list.do");
 
 		return res;
 	}
@@ -124,10 +124,7 @@ public class ZustAdminController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Zust zust, final String message) {
 		ModelAndView res;
 		res = new ModelAndView("zust/edit");
-		final int newspaperId = zust.getNewspaper().getId();
-		final Newspaper newspaper = this.newspaperService.findOne(newspaperId);
-		final Collection<Newspaper> newspapers = new ArrayList<Newspaper>();
-		newspapers.add(newspaper);
+		final Collection<Newspaper> newspapers = this.newspaperService.findAll();
 
 		res.addObject("zust", zust);
 		res.addObject("newspapers", newspapers);

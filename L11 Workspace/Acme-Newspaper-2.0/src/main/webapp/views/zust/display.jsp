@@ -34,18 +34,22 @@
 <p>
 	<b><spring:message code="zust.gauge" />:&nbsp;</b>
 	<jstl:out value="${zust.gauge}" />
-<p/>
+<p />
 
 <spring:message var="patternDate" code="zust.pattern.date" />
 <b><spring:message code="zust.moment" />:&nbsp;</b>
-<fmt:formatDate value="${zust.moment}"
-	pattern="${patternDate}" />
+<fmt:formatDate value="${zust.moment}" pattern="${patternDate}" />
 <br />
 <br />
 
-<b><spring:message code="zust.address" />:&nbsp;</b>
-<jstl:out value="${zust.address}" />
+<b><spring:message code="zust.description" />:&nbsp;</b>
+<jstl:out value="${zust.description}" />
 <br />
 
-<acme:cancel code="zust.back" url="zust/list.do" />
+<security:authorize access="hasRole('ADMIN')">
+	<acme:cancel code="zust.back" url="zust/admin/list.do" />
+</security:authorize>
+<security:authorize access="permitAll">
+	<acme:cancel code="zust.index" url="welcome/index.do" />
+</security:authorize>
 

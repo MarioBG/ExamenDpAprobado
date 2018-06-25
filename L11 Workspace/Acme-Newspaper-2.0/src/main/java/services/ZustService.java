@@ -74,6 +74,9 @@ public class ZustService {
 		String month = Integer.toString(mm);
 		String year = Integer.toString(yy);
 
+		if (day.length() == 0) {
+			day = "0" + day;
+		}
 		Integer num1 = (int) (Math.random() * 10000);
 		String number = num1.toString();
 
@@ -84,16 +87,16 @@ public class ZustService {
 		return ticker;
 	}
 
-	public Zust save(final Zust Zust) {
+	public Zust save(final Zust zust) {
 
-		Assert.notNull(Zust);
-		if (Zust.getId() == 0) {
-			Zust.setMoment(new Date(System.currentTimeMillis() - 1000));
-		}
+		Assert.notNull(zust);
 
 		Zust res;
 
-		res = this.zustRepository.save(Zust);
+		if (zust.getMoment() == null) {
+			zust.setMoment(new Date());
+		}
+		res = this.zustRepository.save(zust);
 
 		return res;
 	}

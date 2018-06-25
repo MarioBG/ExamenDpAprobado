@@ -155,7 +155,6 @@ public class Newspaper extends DomainEntity {
 		this.volumes = volumes;
 	}
 
-	@Valid
 	@OneToMany
 	public Collection<Zust> getZusts() {
 		return this.zusts;

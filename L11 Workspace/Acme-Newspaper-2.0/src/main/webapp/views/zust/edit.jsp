@@ -31,16 +31,26 @@
 	<acme:textarea code="zust.description" path="description" />
 	<br />
 
-	<acme:textarea code="zust.body" path="body" />
-	<br />
-
 	<acme:textbox code="zust.moment" path="moment" placeholder="dd/MM/yyyy" />
 	<br />
 
+	<acme:textbox code="zust.gauge" path="gauge"
+		placeholder="Point (1, 2 or 3)" />
+	<br />
+
+
 	<jstl:if test="${zust.isFinal == true}">
-		<acme:selectObligatory items="${newspapers}" itemLabel="title"
-			code="zust.newspaper" path="newspaperId" />
+		<form:label path="newspaper">
+			<spring:message code="zust.newspaper" />:
+	</form:label>
+		<form:select id="newspaper" path="newspaper">
+			<form:option value="0" label="----" />
+			<form:options items="${newspapers}" itemValue="id" itemLabel="title" />
+		</form:select>
+		<form:errors cssClass="error" path="newspaper" />
+
 	</jstl:if>
+
 	<br />
 
 	<acme:checkbox code="zust.isFinal" path="isFinal" />

@@ -26,7 +26,7 @@
 	defaultorder="descending">
 
 
-	
+
 
 	<spring:message code="zust.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader }" />
@@ -43,17 +43,21 @@
 		sortable="true" format="${formatDate}" />
 
 	<spring:message code="zust.isFinal" var="isFinalHeader" />
-	<display:column title="${ifFinalHeader}">
+	<display:column title="${isFinalHeader}">
 		<jstl:if test="${row.isFinal == true}">
 			<spring:message code="zust.yes" />
 		</jstl:if>
 		<jstl:if test="${row.isFinal == false}">
 			<spring:message code="zust.no" />
+		</jstl:if>
+	</display:column>
+
+	<display:column>
+		<jstl:if test="${row.isFinal == false}">
 			<security:authorize access="hasRole('ADMIN')">
 				<a href="zust/admin/edit.do?zustId=${row.id}"> <spring:message
-						code="zust.display" /></a>
+						code="zust.edit" /></a>
 			</security:authorize>
-
 		</jstl:if>
 	</display:column>
 
