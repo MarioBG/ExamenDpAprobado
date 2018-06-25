@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdminService;
+import services.NewspaperService;
+import services.ZustService;
 import controllers.AbstractController;
 import domain.Admin;
 import domain.Newspaper;
 import domain.Zust;
-import services.AdminService;
-import services.NewspaperService;
-import services.ZustService;
 
 @Controller
 @RequestMapping("/zust/admin")
@@ -27,13 +27,14 @@ public class ZustAdminController extends AbstractController {
 
 	// Services --------------------------------
 	@Autowired
-	private ZustService zustService;
+	private ZustService			zustService;
 
 	@Autowired
-	private AdminService adminService;
+	private AdminService		adminService;
 
 	@Autowired
-	private NewspaperService newspaperService;
+	private NewspaperService	newspaperService;
+
 
 	// Constructors ----------------------------
 	public ZustAdminController() {
@@ -97,8 +98,7 @@ public class ZustAdminController extends AbstractController {
 
 	// List ---------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = false) final Integer newspaperId,
-			@RequestParam(required = false) final String keyword) {
+	public ModelAndView list(@RequestParam(required = false) final Integer newspaperId, @RequestParam(required = false) final String keyword) {
 		ModelAndView res;
 		Collection<Zust> zusts;
 		Collection<Zust> zustToEdit;
@@ -124,7 +124,7 @@ public class ZustAdminController extends AbstractController {
 		final Collection<Zust> zusts = this.zustService.findAllByAdminIdWithoutNewspaper(admin.getId());
 
 		this.zustService.addZust(newspaperId, zustId);
-		result = new ModelAndView("newspaper/display");
+		result = new ModelAndView("redirect:/newspaper/display.do?newspaperId=" + newspaperId);
 		result.addObject(zusts);
 
 		return result;

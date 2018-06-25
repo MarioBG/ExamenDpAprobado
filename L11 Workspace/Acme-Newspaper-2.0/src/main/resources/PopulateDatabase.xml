@@ -13,9 +13,9 @@
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin1" />
+		<property name="username" value="admin" />
 		<property name="password"
-			value="e00cf25ad42683b3df678c61f42c6bda" />
+			value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -2531,6 +2531,35 @@
 		<property name="admin" ref="admin1"></property>
 		<property name="newspaper" ref="newspaper1"></property>
 	</bean>
-	
+	<bean id="zust2" class="domain.Zust">
+		<property name="title" value="Zust 2"/>
+		<property name="ticker" value="160610-2254"/>
+		<property name="gauge" value="3"/>
+		<property name="description" value="Este es un zust muy majo y simpático"></property>
+		<property name="moment" value="2018/04/01 12:00"></property>
+		<property name="isFinal" value="false"></property>
+		<property name="admin" ref="admin1"></property>
+		<property name="newspaper" ref="newspaper1"></property>
+	</bean>
+	<bean id="zust3" class="domain.Zust">
+		<property name="title" value="Zust 3"/>
+		<property name="ticker" value="160610-3087"/>
+		<property name="gauge" value="3"/>
+		<property name="description" value="Este es un zust muy majo y simpático"></property>
+		<property name="moment" value="2018/04/01 12:00"></property>
+		<property name="isFinal" value="false"></property>
+		<property name="admin" ref="admin1"></property>
+		<property name="newspaper" ref="newspaper1"></property>
+	</bean>
+	<bean id="zust4" class="domain.Zust">
+		<property name="title" value="Zust 4"/>
+		<property name="ticker" value="160610-9682"/>
+		<property name="gauge" value="3"/>
+		<property name="description" value="Este es un zust muy majo y simpático"></property>
+		<property name="moment" value="2018/04/01 12:00"></property>
+		<property name="isFinal" value="false"></property>
+		<property name="admin" ref="admin1"></property>
+		<property name="newspaper" ref="newspaper1"></property>
+	</bean>
 
 </beans>

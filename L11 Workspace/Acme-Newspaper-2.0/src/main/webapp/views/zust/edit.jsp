@@ -24,6 +24,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="ticker" />
 	<form:hidden path="admin" />
+	<form:hidden path="version" />
 
 	<acme:textbox code="zust.title" path="title" />
 	<br />
