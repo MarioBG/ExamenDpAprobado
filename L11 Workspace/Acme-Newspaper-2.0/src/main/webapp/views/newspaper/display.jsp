@@ -99,16 +99,18 @@
 </security:authorize>
 
 
-<display:table name="${zusts}" id="row"
+<display:table name="${zusts}" id="zust"
 	requestURI="newspaper/display.do" pagesize="5" class="displaytag">
 
 
 	<display:column>
-		<a href="zust/display.do?zustId=${row.id}"> <spring:message
+		<a href="zust/display.do?zustId=${zust.id}"> <spring:message
 				code="zust.display" /></a>
 	</display:column>
-	<spring:message var="titleHeader" code="zust.title" />
-	<display:column property="title" title="${titleHeader}" />
+	<spring:message code="zust.title" var="titleHeader" />
+	<display:column title="${titleHeader }" class="gauge${zust.gauge}">
+		<jstl:out value="${zust.title}"/>
+	</display:column>
 
 	<spring:message var="descriptionHeader" code="zust.description" />
 	<display:column property="description" title="${descriptionHeader}" />

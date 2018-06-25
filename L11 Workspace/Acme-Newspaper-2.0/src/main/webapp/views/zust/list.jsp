@@ -20,16 +20,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="zust" requestURI="zut/admin/list.do" id="row" defaultsort="3"
 	defaultorder="descending">
 
-
-
-
 	<spring:message code="zust.title" var="titleHeader" />
-	<display:column property="title" title="${titleHeader }" />
+	<display:column title="${titleHeader }" class="gauge${row.gauge}">
+		<jstl:out value="${row.title}"/>
+	</display:column>
 
 	<spring:message code="zust.description" var="descriptionHeader" />
 	<display:column property="description" title="${descriptionHeader}" />
