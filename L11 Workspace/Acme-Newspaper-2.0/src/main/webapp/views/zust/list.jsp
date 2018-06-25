@@ -20,13 +20,17 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+
+
+<!-- ZUST QUE AÚN SE PUEDEN EDITAR -->
+<spring:message code="zust.zustToEdit" />
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="zust" requestURI="zut/admin/list.do" id="row" defaultsort="3"
-	defaultorder="descending">
+	name="zustToEdit" requestURI="zut/admin/list.do" id="row"
+	defaultsort="3" defaultorder="descending">
 
 	<spring:message code="zust.title" var="titleHeader" />
 	<display:column title="${titleHeader }" class="gauge${row.gauge}">
-		<jstl:out value="${row.title}"/>
+		<jstl:out value="${row.title}" />
 	</display:column>
 
 	<spring:message code="zust.description" var="descriptionHeader" />
@@ -58,6 +62,44 @@
 			</security:authorize>
 		</jstl:if>
 	</display:column>
+
+</display:table>
+
+
+<!-- TODOS MIS ZUST -->
+<spring:message code="zust.zustList" />
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="zust" requestURI="zut/admin/list.do" id="row" defaultsort="3"
+	defaultorder="descending">
+
+	<spring:message code="zust.title" var="titleHeader" />
+	<display:column title="${titleHeader }" class="gauge${row.gauge}">
+		<jstl:out value="${row.title}" />
+	</display:column>
+
+	<spring:message code="zust.description" var="descriptionHeader" />
+	<display:column property="description" title="${descriptionHeader}" />
+
+	<spring:message code="zust.ticker" var="tickerHeader" />
+	<display:column property="ticker" title="${tickerHeader}" />
+
+	<spring:message code="zust.format.date" var="formatDate" />
+	<spring:message code="zust.moment" var="momentHeader" />
+	<display:column property="moment" title="${momentHeader }"
+		sortable="true" format="${formatDate}" />
+
+	<spring:message code="zust.isFinal" var="isFinalHeader" />
+	<display:column title="${isFinalHeader}">
+		<jstl:if test="${row.isFinal == true}">
+			<spring:message code="zust.yes" />
+		</jstl:if>
+		<jstl:if test="${row.isFinal == false}">
+			<spring:message code="zust.no" />
+		</jstl:if>
+	</display:column>
+
+	<spring:message code="zust.newspaper" var="newspaperHeader" />
+	<display:column property="newspaper.title" title="${newspaperHeader}" />
 
 </display:table>
 

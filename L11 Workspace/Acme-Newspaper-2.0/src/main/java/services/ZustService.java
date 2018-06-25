@@ -12,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.ZustRepository;
 import domain.Admin;
+import domain.Newspaper;
 import domain.Zust;
+import repositories.ZustRepository;
 
 @Service
 @Transactional
@@ -22,12 +23,14 @@ public class ZustService {
 
 	// Managed repository
 	@Autowired
-	private ZustRepository	zustRepository;
+	private ZustRepository zustRepository;
 
 	// Supporting services
 	@Autowired
-	private AdminService	adminService;
+	private AdminService adminService;
 
+	@Autowired
+	private NewspaperService newspaperService;
 
 	// Constructors
 	public ZustService() {
@@ -117,13 +120,16 @@ public class ZustService {
 		return res;
 	}
 
-	public Zust findOneToEdit(final int zustId) {
-		Assert.isTrue(zustId != 0);
-		Zust res;
+	public Collection<Zust> findOneToEdit(final int adminId) {
 
-		res = this.zustRepository.findOne(zustId);
+		Collection<Zust> findonetoedit = new ArrayList<Zust>();
+		for (Zust zust : findAllByAdminId(adminId)) {
+			if (zust.getIsFinal() == false) {
+				findonetoedit.add(zust);
+			}
+		}
 
-		return res;
+		return findonetoedit;
 	}
 
 	public void delete(final Zust zust) {
@@ -141,6 +147,19 @@ public class ZustService {
 
 	public Collection<Zust> findAllByAdminId(int adminId) {
 		return this.zustRepository.findAllByAdminId(adminId);
+	}
+
+	public Collection<Zust> findAllByAdminIdWithoutNewspaper(int adminId) {
+		return this.zustRepository.findAllByAdminIdWithoutNewspaper(adminId);
+
+	}
+
+	public void addZust(int newspaperId, int zustId) {
+		Zust zust = this.zustRepository.findOne(zustId);
+		Newspaper newspaper = this.newspaperService.findOne(newspaperId);
+		newspaper.getZusts().add(zust);
+		zust.setNewspaper(newspaper);
+
 	}
 
 }

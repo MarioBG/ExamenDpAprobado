@@ -101,16 +101,35 @@ public class ZustAdminController extends AbstractController {
 			@RequestParam(required = false) final String keyword) {
 		ModelAndView res;
 		Collection<Zust> zusts;
+		Collection<Zust> zustToEdit;
 		Admin admin = this.adminService.findByPrincipal();
 		int adminId = admin.getId();
 		zusts = this.zustService.findAllByAdminId(adminId);
+		zustToEdit = this.zustService.findOneToEdit(adminId);
 
 		res = new ModelAndView("zust/list");
 		res.addObject("zust", zusts);
+		res.addObject("zustToEdit", zustToEdit);
 		res.addObject("requestURI", "zust/admin/list.do");
 
 		return res;
 	}
+
+	// ADD ZUST
+
+	@RequestMapping(value = "/addToNewspaper", method = RequestMethod.GET)
+	public ModelAndView addToNewspaper(@RequestParam int newspaperId, @RequestParam int zustId) {
+		ModelAndView result;
+		Admin admin = this.adminService.findByPrincipal();
+		final Collection<Zust> zusts = this.zustService.findAllByAdminIdWithoutNewspaper(admin.getId());
+
+		this.zustService.addZust(newspaperId, zustId);
+		result = new ModelAndView("newspaper/display");
+		result.addObject(zusts);
+
+		return result;
+	}
+
 	// Ancillary methods ----------------------------------------
 
 	protected ModelAndView createEditModelAndView(final Zust zust) {

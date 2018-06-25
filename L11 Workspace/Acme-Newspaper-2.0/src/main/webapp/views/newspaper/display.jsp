@@ -99,7 +99,8 @@
 </security:authorize>
 
 
-<display:table name="${zusts}" id="zust"
+
+<display:table name="${myZusts}" id="zust"
 	requestURI="newspaper/display.do" pagesize="5" class="displaytag">
 
 
@@ -109,7 +110,7 @@
 	</display:column>
 	<spring:message code="zust.title" var="titleHeader" />
 	<display:column title="${titleHeader }" class="gauge${zust.gauge}">
-		<jstl:out value="${zust.title}"/>
+		<jstl:out value="${zust.title}" />
 	</display:column>
 
 	<spring:message var="descriptionHeader" code="zust.description" />
@@ -123,7 +124,50 @@
 	<display:column property="moment" title="${momentHeader }"
 		sortable="true" format="${formatDate}" />
 
-
 </display:table>
+
+<security:authorize access="hasRole('ADMIN')">
+	<!-- ZUST QUE SE PUEDEN AÑADIR A PERIÓDICOS -->
+	<spring:message code="zust.zustToAdd" />
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+		name="zusts" requestURI="zut/admin/list.do" id="row"
+		defaultsort="3" defaultorder="descending">
+
+		<spring:message code="zust.title" var="titleHeader" />
+		<display:column title="${titleHeader }" class="gauge${zust.gauge}">
+			<jstl:out value="${row.title}" />
+		</display:column>
+
+		<spring:message code="zust.description" var="descriptionHeader" />
+		<display:column property="description" title="${descriptionHeader}" />
+
+		<spring:message code="zust.ticker" var="tickerHeader" />
+		<display:column property="ticker" title="${tickerHeader}" />
+
+		<spring:message code="zust.format.date" var="formatDate" />
+		<spring:message code="zust.moment" var="momentHeader" />
+		<display:column property="moment" title="${momentHeader }"
+			sortable="true" format="${formatDate}" />
+
+		<spring:message code="zust.isFinal" var="isFinalHeader" />
+		<display:column title="${isFinalHeader}">
+			<jstl:if test="${row.isFinal == true}">
+				<spring:message code="zust.yes" />
+			</jstl:if>
+			<jstl:if test="${row.isFinal == false}">
+				<spring:message code="zust.no" />
+			</jstl:if>
+		</display:column>
+
+		<display:column>
+			<a href="zust/admin/addToNewspaper.do?zustId=${row.id}&newspaperId=${newspaper.id}"> <spring:message
+					code="zust.addToNewspaper" /></a>
+		</display:column>
+
+	</display:table>
+
+</security:authorize>
+
+
 
 <acme:cancel url="newspaper/list.do" code="newspaper.back" />

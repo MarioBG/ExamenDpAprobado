@@ -15,4 +15,7 @@ public interface ZustRepository extends JpaRepository<Zust, Integer> {
 	@Query("select z from Zust z where z.admin.id = ?1")
 	Collection<Zust> findAllByAdminId(int adminId);
 
+	@Query("select z from Zust z where (z.admin.id = ?1 and z.isFinal =true) and z.newspaper.id = null")
+	Collection<Zust> findAllByAdminIdWithoutNewspaper(int adminId);
+
 }

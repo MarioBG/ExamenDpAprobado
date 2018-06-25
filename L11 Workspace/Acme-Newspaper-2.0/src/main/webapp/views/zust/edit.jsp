@@ -39,19 +39,6 @@
 	<br />
 
 
-	<jstl:if test="${zust.isFinal == true}">
-		<form:label path="newspaper">
-			<spring:message code="zust.newspaper" />:
-	</form:label>
-		<form:select id="newspaper" path="newspaper">
-			<form:option value="0" label="----" />
-			<form:options items="${newspapers}" itemValue="id" itemLabel="title" />
-		</form:select>
-		<form:errors cssClass="error" path="newspaper" />
-
-	</jstl:if>
-
-	<br />
 
 	<acme:checkbox code="zust.isFinal" path="isFinal" />
 

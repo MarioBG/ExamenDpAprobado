@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Admin;
 import domain.Article;
 import domain.Newspaper;
 import domain.Zust;
+import services.AdminService;
 import services.ArticleService;
 import services.CustomerService;
 import services.NewspaperService;
@@ -39,6 +41,9 @@ public class NewspaperController extends AbstractController {
 
 	@Autowired
 	private CustomerService customerService;
+
+	@Autowired
+	private AdminService adminService;
 
 	// Constructors --------------------------------------------------
 
@@ -79,7 +84,8 @@ public class NewspaperController extends AbstractController {
 		Newspaper newspaper = newspaperService.findOne(newspaperId);
 		Collection<Article> articles;
 		boolean areSubscribe = false;
-		Collection<Zust> zusts = this.zustService.zustByNewspaperId(newspaperId);
+		Collection<Zust> myZusts = this.zustService.zustByNewspaperId(newspaperId);
+		Collection<Zust> zusts;
 
 		if (keyword != null) {
 			articles = this.articleService.findPerKeyword(keyword, newspaperId);
@@ -92,13 +98,19 @@ public class NewspaperController extends AbstractController {
 				|| userService.findByPrincipal() != null) {
 			areSubscribe = true;
 		}
-
 		ModelAndView result = new ModelAndView("newspaper/display");
 		result.addObject("newspaper", newspaper);
 		result.addObject("articles", articles);
-		result.addObject("zusts", zusts);
+		result.addObject("myZusts", myZusts);
 		result.addObject("areSubscribe", areSubscribe);
 		result.addObject("date", new Date());
+		try {
+			Admin admin = this.adminService.findByPrincipal();
+			zusts = this.zustService.findAllByAdminIdWithoutNewspaper(admin.getId());
+			result.addObject("zusts", zusts);
+
+		} catch (Exception e) {
+		}
 
 		return result;
 
