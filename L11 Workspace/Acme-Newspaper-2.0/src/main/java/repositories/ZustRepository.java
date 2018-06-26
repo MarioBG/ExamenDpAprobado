@@ -1,3 +1,4 @@
+
 package repositories;
 
 import java.util.Collection;
@@ -9,7 +10,7 @@ import domain.Zust;
 
 public interface ZustRepository extends JpaRepository<Zust, Integer> {
 
-	@Query("select z from Zust z where z.newspaper.id = ?1")
+	@Query("select z from Zust z where z.newspaper.id = ?1 and z.moment <= current_date")
 	Collection<Zust> zustByNewspaperId(int newspaperId);
 
 	@Query("select z from Zust z where z.admin.id = ?1")

@@ -2051,6 +2051,9 @@
 		<property name="zusts">
 			<list>
 				<ref bean="zust1" />
+				<ref bean="zust2" />
+				<ref bean="zust3" />
+				<ref bean="zust4" />
 			</list>
 		</property>
 		<property name="articles">
