@@ -115,6 +115,20 @@ public class ZustAdminController extends AbstractController {
 		return res;
 	}
 
+	// ADD ZUST
+
+	@RequestMapping(value = "/addToNewspaper", method = RequestMethod.GET)
+	public ModelAndView addToNewspaper(@RequestParam int newspaperId, @RequestParam int zustId) {
+		ModelAndView result;
+		Admin admin = this.adminService.findByPrincipal();
+		final Collection<Zust> zusts = this.zustService.findAllByAdminIdWithoutNewspaper(admin.getId());
+
+		this.zustService.addZust(newspaperId, zustId);
+		result = new ModelAndView("redirect:/newspaper/display.do?newspaperId=" + newspaperId);
+		result.addObject(zusts);
+
+		return result;
+	}
 
 	// Ancillary methods ----------------------------------------
 
