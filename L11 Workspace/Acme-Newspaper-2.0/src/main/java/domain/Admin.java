@@ -28,7 +28,7 @@ public class Admin extends Actor {
 
 
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy = "admin")
 	public Collection<Zust> getZusts() {
 		return this.zusts;
 	}

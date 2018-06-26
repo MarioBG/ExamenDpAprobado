@@ -26,7 +26,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(indexes = { @Index(columnList = "publisher_id") })
+@Table(indexes = {
+	@Index(columnList = "publisher_id")
+})
 public class Newspaper extends DomainEntity {
 
 	// Constructors
@@ -35,13 +37,15 @@ public class Newspaper extends DomainEntity {
 		super();
 	}
 
+
 	// Attributes
 
-	private String title;
-	private String description;
-	private Date publicationDate;
-	private String picture;
-	private boolean isPrivate;
+	private String	title;
+	private String	description;
+	private Date	publicationDate;
+	private String	picture;
+	private boolean	isPrivate;
+
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
@@ -91,14 +95,16 @@ public class Newspaper extends DomainEntity {
 		this.isPrivate = isPrivate;
 	}
 
+
 	// Relationships
 
-	private User publisher;
-	private Collection<Article> articles;
-	private Collection<SubscriptionNewspaper> subscriptionsNewspaper;
-	private Collection<Advertisement> advertisements;
-	private Collection<Volume> volumes;
-	private Collection<Zust> zusts;
+	private User								publisher;
+	private Collection<Article>					articles;
+	private Collection<SubscriptionNewspaper>	subscriptionsNewspaper;
+	private Collection<Advertisement>			advertisements;
+	private Collection<Volume>					volumes;
+	private Collection<Zust>					zusts;
+
 
 	@Valid
 	@NotNull
@@ -140,7 +146,7 @@ public class Newspaper extends DomainEntity {
 		return this.advertisements;
 	}
 
-	public void setAdvertisements(Collection<Advertisement> advertisements) {
+	public void setAdvertisements(final Collection<Advertisement> advertisements) {
 		this.advertisements = advertisements;
 	}
 
@@ -151,16 +157,16 @@ public class Newspaper extends DomainEntity {
 		return this.volumes;
 	}
 
-	public void setVolumes(Collection<Volume> volumes) {
+	public void setVolumes(final Collection<Volume> volumes) {
 		this.volumes = volumes;
 	}
 
-	@OneToMany
+	@OneToMany(mappedBy = "newspaper")
 	public Collection<Zust> getZusts() {
 		return this.zusts;
 	}
 
-	public void setZusts(Collection<Zust> zusts) {
+	public void setZusts(final Collection<Zust> zusts) {
 		this.zusts = zusts;
 	}
 
