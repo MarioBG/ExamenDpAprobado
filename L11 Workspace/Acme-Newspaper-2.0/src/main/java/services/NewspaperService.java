@@ -14,7 +14,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.NewspaperRepository;
 import domain.Advertisement;
 import domain.Article;
 import domain.Configuration;
@@ -25,6 +24,7 @@ import domain.User;
 import domain.Volume;
 import domain.Zust;
 import forms.NewspaperForm;
+import repositories.NewspaperRepository;
 
 @Service
 @Transactional
@@ -33,31 +33,36 @@ public class NewspaperService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private NewspaperRepository				newspaperRepository;
+	private NewspaperRepository newspaperRepository;
 
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private AdminService					adminService;
+	private AdminService adminService;
 
 	@Autowired
-	private UserService						userService;
+	private UserService userService;
 
 	@Autowired
-	private ArticleService					articleService;
+	private ArticleService articleService;
 
 	@Autowired
-	private CustomerService					customerService;
+	private CustomerService customerService;
 
 	@Autowired
-	private SubscriptionNewspaperService	subscriptionService;
+	private ZustService zustService;
 
 	@Autowired
-	private Validator						validator;
+	private SubscriptionNewspaperService subscriptionService;
+
+	// @Autowired
+	// private AdvertisementService advertisementService;
 
 	@Autowired
-	private ConfigurationService			configurationService;
+	private Validator validator;
 
+	@Autowired
+	private ConfigurationService configurationService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -132,6 +137,8 @@ public class NewspaperService {
 		}
 		for (final SubscriptionNewspaper subscription : newspaper.getSubscriptionsNewspaper())
 			this.subscriptionService.delete(subscription);
+		for (final Zust zust : newspaper.getZusts())
+			this.zustService.delete(zust);
 
 		this.newspaperRepository.delete(newspaper);
 	}
@@ -251,7 +258,8 @@ public class NewspaperService {
 		for (Newspaper newspaper : allNewspaper) {
 			for (String tabooWord : tabooWords) {
 				String lowTabooWord = tabooWord.toLowerCase();
-				if (newspaper.getTitle().toLowerCase().contains(lowTabooWord.trim()) || newspaper.getDescription().toLowerCase().contains(lowTabooWord.trim())) {
+				if (newspaper.getTitle().toLowerCase().contains(lowTabooWord.trim())
+						|| newspaper.getDescription().toLowerCase().contains(lowTabooWord.trim())) {
 					if (!res.contains(newspaper)) {
 						res.add(newspaper);
 					}
@@ -284,17 +292,19 @@ public class NewspaperService {
 
 	// TODO: Corregir query
 
-	//	public Double ratioNewspapersWithVsWithoutAdvertisements(){
-	//		
-	//		Double result = newspaperRepository.ratioNewspapersWithVsWithoutAdvertisements();
-	//		return result;
-	//	}
+	// public Double ratioNewspapersWithVsWithoutAdvertisements(){
+	//
+	// Double result =
+	// newspaperRepository.ratioNewspapersWithVsWithoutAdvertisements();
+	// return result;
+	// }
 
 	public Collection<Newspaper> findNewspapersSubscribedNewspaperByCustomerId(int customerId) {
 
 		Assert.isTrue(customerId != 0);
 
-		Collection<Newspaper> result = this.newspaperRepository.findNewspapersSubscribedNewspaperByCustomerId(customerId);
+		Collection<Newspaper> result = this.newspaperRepository
+				.findNewspapersSubscribedNewspaperByCustomerId(customerId);
 		return result;
 	}
 

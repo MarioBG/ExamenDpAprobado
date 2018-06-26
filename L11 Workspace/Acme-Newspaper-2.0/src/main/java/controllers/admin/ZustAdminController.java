@@ -90,9 +90,15 @@ public class ZustAdminController extends AbstractController {
 	// Delete ----------------------------------
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(final int zustId) {
+
+		ModelAndView result = new ModelAndView("redirect:/welcome/index.do");
 		final Zust zust = this.zustService.findOne(zustId);
-		this.zustService.delete(zust);
-		return new ModelAndView("redirect:list.do");
+		try {
+			this.zustService.delete(zust);
+		} catch (Throwable oops) {
+			result.addObject("message", "zust.commit.error");
+		}
+		return result;
 	}
 
 	// List ---------------------------------
