@@ -27,7 +27,7 @@
 	<spring:message code="zust.zustToEdit" />
 </h2>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="zustToEdit" requestURI="zut/admin/list.do" id="row"
+	name="zustToEdit" requestURI="zust/admin/list.do" id="row"
 	defaultsort="3" defaultorder="descending">
 
 	<spring:message code="zust.title" var="titleHeader" />
@@ -73,7 +73,7 @@
 	<spring:message code="zust.zustList" />
 </h2>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="zust" requestURI="zut/admin/list.do" id="row" defaultsort="3"
+	name="zust" requestURI="zust/admin/list.do" id="row" defaultsort="3"
 	defaultorder="descending">
 
 	<spring:message code="zust.title" var="titleHeader" />

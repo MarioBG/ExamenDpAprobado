@@ -54,8 +54,6 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 		<jstl:if test="${zust.id !=0 && zust.isFinal == false}">
-
-
 			<input type="button" value="<spring:message code="zust.delete" />"
 				onclick="javascript: window.location.assign('zust/admin/delete.do?zustId=${zust.id}')" />
 		</jstl:if>
