@@ -23,7 +23,9 @@
 
 
 <!-- ZUST QUE AÚN SE PUEDEN EDITAR -->
-<spring:message code="zust.zustToEdit" />
+<h2>
+	<spring:message code="zust.zustToEdit" />
+</h2>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="zustToEdit" requestURI="zut/admin/list.do" id="row"
 	defaultsort="3" defaultorder="descending">
@@ -67,7 +69,9 @@
 
 
 <!-- TODOS MIS ZUST -->
-<spring:message code="zust.zustList" />
+<h2>
+	<spring:message code="zust.zustList" />
+</h2>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="zust" requestURI="zut/admin/list.do" id="row" defaultsort="3"
 	defaultorder="descending">

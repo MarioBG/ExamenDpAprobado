@@ -2527,7 +2527,7 @@
 		<property name="gauge" value="3"/>
 		<property name="description" value="Este es un zust muy majo y simpático"></property>
 		<property name="moment" value="2018/04/01 12:00"></property>
-		<property name="isFinal" value="false"></property>
+		<property name="isFinal" value="true"></property>
 		<property name="admin" ref="admin1"></property>
 		<property name="newspaper" ref="newspaper1"></property>
 	</bean>

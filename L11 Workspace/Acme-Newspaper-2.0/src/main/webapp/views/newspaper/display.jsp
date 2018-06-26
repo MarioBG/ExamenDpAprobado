@@ -55,9 +55,9 @@
 
 <jstl:if test="${newspaper.isPrivate == false or areSubscribe == true}">
 
-	<h3>
+	<h2>
 		<spring:message code="newspaper.articles" />
-	</h3>
+	</h2>
 
 	<input type="text" id="keyword"
 		placeholder="<spring:message code="newspaper.search"/>"
@@ -98,8 +98,9 @@
 	</jstl:if>
 </security:authorize>
 
-
-
+<h2>
+	<spring:message code="newspaper.myZusts"></spring:message>
+</h2>
 <display:table name="${myZusts}" id="zust"
 	requestURI="newspaper/display.do" pagesize="5" class="displaytag">
 
@@ -130,8 +131,8 @@
 	<!-- ZUST QUE SE PUEDEN AÑADIR A PERIÓDICOS -->
 	<spring:message code="zust.zustToAdd" />
 	<display:table pagesize="5" class="displaytag" keepStatus="true"
-		name="zusts" requestURI="zut/admin/list.do" id="row"
-		defaultsort="3" defaultorder="descending">
+		name="zusts" requestURI="zut/admin/list.do" id="row" defaultsort="3"
+		defaultorder="descending">
 
 		<spring:message code="zust.title" var="titleHeader" />
 		<display:column title="${titleHeader }" class="gauge${zust.gauge}">
@@ -160,8 +161,9 @@
 		</display:column>
 
 		<display:column>
-			<a href="zust/admin/addToNewspaper.do?zustId=${row.id}&newspaperId=${newspaper.id}"> <spring:message
-					code="zust.addToNewspaper" /></a>
+			<input type="button"
+				value="<spring:message code="zust.addToNewspaper" />"
+				onclick="javascript: window.location.assign('newspaper/addToNewspaper.do?zustId=${row.id}&newspaperId=${newspaper.id}')" />
 		</display:column>
 
 	</display:table>

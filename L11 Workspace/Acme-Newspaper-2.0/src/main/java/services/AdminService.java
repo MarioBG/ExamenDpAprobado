@@ -97,8 +97,11 @@ public class AdminService {
 		Admin res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		res = this.adminRepository.findAdminByUserAccountId(userAccount.getId());
-		Assert.notNull(res);
+		if (userAccount == null) {
+			res = null;
+		} else {
+			res = this.adminRepository.findAdminByUserAccountId(userAccount.getId());
+		}
 		return res;
 	}
 
@@ -271,15 +274,16 @@ public class AdminService {
 	}
 
 	// ACME-NEWSPAPER 2.0
-	
+
 	// C-1
 	public Double ratioNewspapersAds() {
 		return this.adminRepository.ratioNewspapersWithVsWithoutAdvertisements();
 	}
-	
+
 	// C-2
 	public Double ratioAdsTabooWords() {
-		return (double) this.advertisementService.getAdvertisementsTabooWords().size() / (double) this.advertisementService.findAll().size();
+		return (double) this.advertisementService.getAdvertisementsTabooWords().size()
+				/ (double) this.advertisementService.findAll().size();
 	}
 
 	// B-1
@@ -290,9 +294,9 @@ public class AdminService {
 	}
 
 	// B-2
-	
-	public String ratioSubscriptionsVolumeVersusSubscriptionsNewspaper(){
-		
+
+	public String ratioSubscriptionsVolumeVersusSubscriptionsNewspaper() {
+
 		String result = adminRepository.ratioSubscriptionsVolumeVersusSubscriptionsNewspaper();
 		return result;
 	}

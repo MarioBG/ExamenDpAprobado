@@ -99,7 +99,8 @@
 		
 		<!--  ZUST -->
 		
-		<security:intercept-url pattern="/zust/admin/**" access="hasRole('ADMIN')" />		
+		<security:intercept-url pattern="/zust/admin/**" access="hasRole('ADMIN')" />	
+		<security:intercept-url pattern="/newspaper/addToNewspaper.do" access="hasRole('ADMIN')" />	
 		<security:intercept-url pattern="/zust/display.do" access="permitAll" />
 		
 		

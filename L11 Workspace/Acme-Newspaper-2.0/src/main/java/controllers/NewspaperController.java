@@ -86,33 +86,49 @@ public class NewspaperController extends AbstractController {
 		boolean areSubscribe = false;
 		Collection<Zust> myZusts = this.zustService.zustByNewspaperId(newspaperId);
 		Collection<Zust> zusts;
+		ModelAndView result = new ModelAndView("newspaper/display");
 
 		if (keyword != null) {
 			articles = this.articleService.findPerKeyword(keyword, newspaperId);
 		} else {
 			articles = newspaper.getArticles();
 		}
+		result.addObject("articles", articles);
 
 		if ((customerService.findByPrincipal() != null
 				&& newspaperService.findSubscribedNewspapersByPrincipal().contains(newspaper))
 				|| userService.findByPrincipal() != null) {
 			areSubscribe = true;
+
 		}
-		ModelAndView result = new ModelAndView("newspaper/display");
+
+		if (this.adminService.findByPrincipal() != null) {
+			zusts = this.zustService.findAllByAdminIdWithoutNewspaper(this.adminService.findByPrincipal().getId());
+			result.addObject("zusts", zusts);
+		}
+
 		result.addObject("newspaper", newspaper);
-		result.addObject("articles", articles);
 		result.addObject("myZusts", myZusts);
 		result.addObject("areSubscribe", areSubscribe);
 		result.addObject("date", new Date());
-		try {
-			Admin admin = this.adminService.findByPrincipal();
-			zusts = this.zustService.findAllByAdminIdWithoutNewspaper(admin.getId());
-			result.addObject("zusts", zusts);
-
-		} catch (Exception e) {
-		}
 
 		return result;
 
 	}
+
+	// ADD ZUST
+
+	@RequestMapping(value = "/addToNewspaper", method = RequestMethod.GET)
+	public ModelAndView addToNewspaper(@RequestParam int newspaperId, @RequestParam int zustId) {
+		ModelAndView result;
+		Admin admin = this.adminService.findByPrincipal();
+		final Collection<Zust> zusts = this.zustService.findAllByAdminIdWithoutNewspaper(admin.getId());
+
+		this.zustService.addZust(newspaperId, zustId);
+		result = new ModelAndView("redirect:display.do?newspaperId=" + newspaperId);
+		result.addObject(zusts);
+
+		return result;
+	}
+
 }
