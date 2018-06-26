@@ -32,11 +32,12 @@
 	<acme:textarea code="zust.description" path="description" />
 	<br />
 
-	<acme:textbox code="zust.moment" path="moment" placeholder="dd/MM/yyyy" />
+	<acme:textbox code="zust.moment" path="moment" placeholder="dd/MM/yyyy HH:mm" />
 	<br />
 
+	<spring:message code="zust.gauge.tooltip" var="tooltip"/>
 	<acme:textbox code="zust.gauge" path="gauge"
-		placeholder="Point (1, 2 or 3)" />
+		placeholder="${ tooltip }" />
 	<br />
 
 
