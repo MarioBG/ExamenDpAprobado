@@ -162,4 +162,8 @@ public class ZustService {
 
 	}
 
+	public void flush() {
+		this.zustRepository.flush();
+	}
+
 }
